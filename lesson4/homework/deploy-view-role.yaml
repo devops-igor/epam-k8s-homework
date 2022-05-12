@@ -1,0 +1,24 @@
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: deploy-view-role
+rules:
+  - apiGroups: ["", "apps"]
+    resources: ["pods", "deployments"]
+    verbs: ["list"]
+
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: deploy-view-role-binding
+  namespace: default
+subjects:
+  - kind: User
+    name: deploy-view
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: deploy-view-role
+  apiGroup: rbac.authorization.k8s.io
